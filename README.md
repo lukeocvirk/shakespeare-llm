@@ -1,6 +1,6 @@
 # Shakespeare LLM
 
-Character-level transformer trained on the works of William Shakespeare. Data downloads automatically and checkpoints are saved every epoch.
+Character-level transformer trained on the works of William Shakespeare.
 
 ## Setup
 Using `uv` (recommended):
