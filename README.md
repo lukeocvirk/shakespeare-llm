@@ -1,9 +1,4 @@
 # Shakespeare LLM
-# Shakespeare LLM — quickstart
-
-Tiny character-level transformer trained on the Tiny Shakespeare dataset.
-
-This README is a compact reference for the CLI tools in this repo and the small frontend demo in `front-end/`.
 
 Prereqs
 - Python 3.10+ (this repo has a `.venv` in the project root used in examples)
