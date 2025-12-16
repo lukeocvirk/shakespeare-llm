@@ -1,0 +1,28 @@
+# Node modules
+node_modules/
+
+# Vite / build output
+.vite/
+dist/
+build/
+
+# Environment files (may contain secrets)
+.env
+.env.*
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# OS files
+.DS_Store
+
+# IDE / editor folders
+.vscode/
+.idea/
+
+# Misc
+.cache/
+coverage/
