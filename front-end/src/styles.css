@@ -58,4 +58,6 @@ body { margin: 0; background: var(--bg); color: var(--text); font-family: Inter,
 .sources-list a { color: #3366cc; text-decoration: none; }
 .sources-list a:hover { text-decoration: underline; }
 
+.credit { font-size: 15px; text-align: right; color: var(--indigo); margin: 0 0 12px; }
+
 .footer-credit { color: #777; }

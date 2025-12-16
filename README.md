@@ -50,7 +50,7 @@ VITE_API_BASE=http://localhost:8000 npm run dev
 - From the project root use the repo venv python to run the example server and point it at a checkpoint:
 
 ```
-CHECKPOINT_PATH=$(pwd)/checkpoints/epoch_001.pt /path/to/.venv/bin/python3 front-end/example_server.py
+CHECKPOINT_PATH=$(pwd)/checkpoints/epoch_001.pt .venv/bin/python3 front-end/example_server.py
 ```
 
 - If the model or dependencies (torch) are missing the server will fall back to echo mode; logs show whether the checkpoint loaded successfully.
