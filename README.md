@@ -1,4 +1,5 @@
 # Shakespeare LLM
+Character-level transformer trained on the works of William Shakespeare.
 
 Prereqs
 - Python 3.10+ (this repo has a `.venv` in the project root used in examples)
