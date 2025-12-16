@@ -1,6 +1,5 @@
-"""Example dev server for the frontend. Run this to provide POST /api/generate.
-
-This server will echo prompts by default. If you want real samples, update the `generate_from_model` function to call into your model sampling code.
+"""
+Example dev server for the frontend.
 """
 from flask import Flask, request, jsonify, make_response
 import time
