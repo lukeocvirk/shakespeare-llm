@@ -1,12 +1,17 @@
 """Example dev server for the frontend. Run this to provide POST /api/generate.
 
-This server will echo prompts by default. If you want real samples, update the `generate_from_model` function to call into your model sampling code.
+This server will echo prompts by default. If you want real samples, update the
+`generate_from_model` function to call into your model sampling code.
 """
-from flask import Flask, request, jsonify, make_response
+from flask import Flask, request, jsonify, make_response, send_from_directory
 import time
 import os
 from typing import Optional
 
+
+# Repository + frontend paths (used for serving the built frontend).
+REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+FRONTEND_DIST = os.path.join(REPO_ROOT, 'front-end', 'dist')
 
 # Try to import the sampling utilities from the repo; if unavailable, we'll fall back to echo.
 MODEL_AVAILABLE = False
@@ -18,9 +23,8 @@ model_device = None
 try:
     # import functions from sample.py (in the repository root)
     # make sure Python path includes repo root
-    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-    if repo_root not in os.sys.path:
-        os.sys.path.insert(0, repo_root)
+    if REPO_ROOT not in os.sys.path:
+        os.sys.path.insert(0, REPO_ROOT)
 
     from sample import load_checkpoint, sample as sample_from_checkpoint, select_device
     import torch
@@ -87,19 +91,26 @@ def api_generate_get():
 
 
 @app.route('/')
-def index():
-    # Short developer-friendly message when visiting the server root in a browser.
-    html = '''
-    <html><body>
-      <h3>Shakespeare LLM Example Server</h3>
-      <p>This server provides <code>/api/generate</code> for POST requests from the frontend.</p>
-      <p>To run the frontend dev server, open a separate terminal and run: <code>npm run dev</code> in <code>front-end</code>.</p>
-      <p>To quickly test generation from a browser, try: <a href="/api/generate?prompt=ROMEO:%20Hello">/api/generate?prompt=ROMEO:%20Hello</a></p>
-    </body></html>
-    '''
-    resp = make_response(html)
-    resp.headers['Content-Type'] = 'text/html'
-    return resp
+@app.route('/<path:path>')
+def serve_frontend(path: str = ''):
+    # Serve the built frontend if present; otherwise show a helpful message.
+    if not os.path.isdir(FRONTEND_DIST):
+        html = '''
+        <html><body>
+          <h3>Shakespeare LLM Example Server</h3>
+          <p>This server provides <code>/api/generate</code> for POST requests from the frontend.</p>
+          <p>To build the frontend, run <code>npm install</code> and <code>npm run build</code> in <code>front-end</code>.</p>
+          <p>To run the frontend dev server instead, run: <code>npm run dev</code> in <code>front-end</code>.</p>
+          <p>To quickly test generation from a browser, try: <a href="/api/generate?prompt=ROMEO:%20Hello">/api/generate?prompt=ROMEO:%20Hello</a></p>
+        </body></html>
+        '''
+        resp = make_response(html)
+        resp.headers['Content-Type'] = 'text/html'
+        return resp
+
+    if path and os.path.exists(os.path.join(FRONTEND_DIST, path)):
+        return send_from_directory(FRONTEND_DIST, path)
+    return send_from_directory(FRONTEND_DIST, 'index.html')
 
 
 if __name__ == '__main__':
@@ -118,4 +129,4 @@ if __name__ == '__main__':
             print('Failed to load checkpoint; continuing with echo fallback. Error:', e)
 
     port = int(os.environ.get('SERVER_PORT', os.environ.get('PORT', 8000)))
-    app.run(port=port)
+    app.run(host='0.0.0.0', port=port)

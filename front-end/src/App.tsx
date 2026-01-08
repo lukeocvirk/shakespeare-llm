@@ -36,7 +36,7 @@ export default function App() {
               <br></br><br></br>(Gondal, 2024)
               <br></br><br></br>The following is an example of how a sentence might be tokenized by a large language model:
               <div style={{ display: 'flex', justifyContent: 'center', margin: '16px 0' }}>
-                <img src="./assets/kant_quote.png" style={{ width: '100%', maxWidth: '1000px' }} />
+                <img src="/assets/kant_quote.png" style={{ width: '100%', maxWidth: '1000px' }} />
               </div>
               (Laforge, 2024)
             </p>
@@ -50,7 +50,7 @@ export default function App() {
               valid natural language by having well-defined embeddings (along with model layers and good training objectives), despite not actually understanding the words that the embeddings represent.
               <br></br><br></br>(Gondal, 2024)
               <div style={{ display: 'flex', justifyContent: 'center', margin: '16px 0' }}>
-                <img src="./assets/embeddings_visualization.jpg" style={{ width: '100%', maxWidth: '1000px' }} />
+                <img src="/assets/embeddings_visualization.jpg" style={{ width: '100%', maxWidth: '1000px' }} />
               </div>
               (Hassani, 2025)
             </p>
@@ -62,7 +62,7 @@ export default function App() {
               (e.g., probablity-weighted sampling, greedy decoding, etc).
               <br></br><br></br>(Stryker, 2025)
               <div style={{ display: 'flex', justifyContent: 'center', margin: '16px 0' }}>
-                <img src="./assets/llm_sampling.png" style={{ width: '100%', maxWidth: '1000px' }} />
+                <img src="/assets/llm_sampling.png" style={{ width: '100%', maxWidth: '1000px' }} />
               </div>
             </p>
           </section>

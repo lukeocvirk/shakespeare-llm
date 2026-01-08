@@ -55,7 +55,36 @@ CHECKPOINT_PATH=$(pwd)/checkpoints/epoch_001.pt .venv/bin/python3 front-end/exam
 
 - If the model or dependencies (torch) are missing the server will fall back to echo mode; logs show whether the checkpoint loaded successfully.
 
+Single-service (production-style)
+
+Build the frontend and serve it from the same Python server (same origin for API + UI).
+
+1) Build the frontend:
+
+```
+cd front-end
+npm install
+npm run build
+```
+
+2) Install backend deps (from repo root):
+
+```
+python -m pip install -r requirements.txt
+```
+
+3) Run the server (from repo root):
+
+```
+CHECKPOINT_PATH=$(pwd)/checkpoints/epoch_001.pt PORT=8000 .venv/bin/python3 front-end/example_server.py
+```
+
+4) Open http://localhost:8000
+
+Notes:
+- In production builds, the frontend defaults to same-origin `/api/generate`. If you need a different API host, set `VITE_API_BASE` at build time.
+- The server will serve `front-end/dist` automatically if it exists. If you only see the server HTML message, re-run the frontend build.
+
 Notes
 - The frontend expects `POST /api/generate` with JSON { prompt: string, max_new_tokens?: number } and returns { generated_text }.
 - For development the example server enables CORS and a simple GET helper at `/api/generate?prompt=...` for quick browser tests.
-

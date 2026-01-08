@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8000'
+const API_BASE =
+  import.meta.env.VITE_API_BASE ||
+  (import.meta.env.DEV ? 'http://localhost:8000' : '')
 
 type Message = { id: string; author: 'user' | 'bot'; text: string }
 
